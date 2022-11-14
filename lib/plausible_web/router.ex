@@ -61,7 +61,7 @@ defmodule PlausibleWeb.Router do
   end
 
   scope "/api/stats", PlausibleWeb.Api do
-    pipe_through :internal_stats_api
+    pipe_through [:public_api, PlausibleWeb.AuthorizeStatsApiPlug]
 
     get "/:domain/current-visitors", StatsController, :current_visitors
     get "/:domain/main-graph", StatsController, :main_graph
